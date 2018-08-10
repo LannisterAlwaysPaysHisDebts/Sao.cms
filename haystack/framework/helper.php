@@ -4,7 +4,3 @@
  */
 
 require 'heart.php';
-
-getConfig(){
-    new 
-}
