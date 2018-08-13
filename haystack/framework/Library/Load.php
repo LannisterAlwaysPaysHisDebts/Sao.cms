@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Library;
+namespace Core;
 
 class Load
 {
@@ -43,6 +43,10 @@ class Load
      */
     private static $composerPath;
 
+    /**
+     * 注册自动加载机制
+     * @param string $autoload
+     */
     public static function register($autoload = '')
     {
         // 自动加载
@@ -61,19 +65,31 @@ class Load
                 $declaredClass = get_declared_classes();
                 $composerClass = array_pop($declaredClass);
 
-                foreach ()
-
+                foreach (['prefixLengthsPsr4', 'prefixDirsPsr4', 'fallbackDirsPsr4', 'prefixesPsr0', 'fallbackDirsPsr0', 'classMap', 'files'] as $attr) {
+                    if (property_exists($composerClass, $attr)) {
+                        self::${$attr} = $composerClass::${$attr};
+                    }
+                }
             } else {
                 self::registerComposerLoader(self::$composerPath);
             }
         }
 
+        // 注册命名空间定义
+        self::addNamespace([
+            'Core' => dirname(__DIR__),
+        ]);
 
+        if (is_file($rootPath . 'runtime' . DIRECTORY_SEPARATOR . 'classmap.php')) {
+            self::addClassMap(__include_file($rootPath . 'runtime' . DIRECTORY_SEPARATOR . 'classmap.php'));
+        }
 
+        // 自动加载extend目录
+        self::addAutoLoadDir($rootPath . 'extend');
     }
 
     /**
-     *
+     * 自动加载
      * @param $class
      * @return bool
      */
@@ -154,6 +170,43 @@ class Load
             }
         } else {
             self::addPsr4($namespace . '\\', rtrim($path, DIRECTORY_SEPARATOR), true);
+        }
+    }
+
+    /**
+     * 注册自动加载类库目录
+     * @param $path
+     */
+    public static function addAutoLoadDir($path)
+    {
+        self::$fallbackDirsPsr4[] = $path;
+    }
+
+    public static function registerComposerLoader($composerPath)
+    {
+        if (is_file($composerPath . 'autoload_namespaces.php')) {
+            $map = require $composerPath . 'autoload_namespaces.php';
+            foreach ($map as $namespace => $path) {
+                self::addPsr0($namespace, $path);
+            }
+        }
+
+        if (is_file($composerPath . 'autoload_psr4.php')) {
+            $map = require $composerPath . 'autoload_psr4.php';
+            foreach ($map as $namespace => $path) {
+                self::addPsr4($namespace, $path);
+            }
+        }
+
+        if (is_file($composerPath . 'autoload_classmap.php')) {
+            $classMap = require $composerPath . 'autoload_classmap.php';
+            if ($classMap) {
+                self::addClassMap($classMap);
+            }
+        }
+
+        if (is_file($composerPath . 'autoload_files.php')) {
+            self::$files = require $composerPath . 'autoload_files.php';
         }
     }
 

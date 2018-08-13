@@ -1,5 +1,5 @@
 <?php
-namespace Core\Library;
+namespace Core;
 
 class config
 {
