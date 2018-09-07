@@ -5,4 +5,30 @@
 	<groupId>com.sao</groupId>
 	<artifactId>sao-cms</artifactId>
 	<version>0.0.1</version>
+	<developers>
+		<developer>
+			<id>SingleCycle</id>
+			<name>lipeiheng</name>
+			<timezone>${user.timezone}</timezone>
+			<roles>
+				<role>Java Engineer</role>
+			</roles>
+			<organization>骚组织</organization>
+			<email>1019844337@qq.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<jdk.version>1.9</jdk.version>
+		<file.encoding>utf-8</file.encoding>
+	</properties>
+
+	<dependencyManagement>
+
+	</dependencyManagement>
+
+	<dependencies>
+
+	</dependencies>
+
 </project>
