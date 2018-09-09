@@ -1,0 +1,35 @@
+allprojects {
+
+}
+
+artifacts {
+
+}
+
+buildscript {
+
+}
+
+configurations {
+
+}
+
+dependencies {
+
+}
+
+repositories {
+
+}
+
+sourceSets {
+
+}
+
+subprojects {
+
+}
+
+publishing {
+
+}

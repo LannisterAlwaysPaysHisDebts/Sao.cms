@@ -21,6 +21,7 @@
 	<properties>
 		<jdk.version>1.9</jdk.version>
 		<file.encoding>utf-8</file.encoding>
+		<spring-cloud-serial.version></spring-cloud-serial.version>
 	</properties>
 
 	<dependencyManagement>
@@ -31,4 +32,15 @@
 
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>DevEnd</id>
+		</profile>
+		<profile>
+			<id>TestEnv</id>
+		</profile>
+		<profile>
+			<id>ProEnv</id>
+		</profile>
+	</profiles>
 </project>
