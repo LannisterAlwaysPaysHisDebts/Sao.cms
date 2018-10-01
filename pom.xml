@@ -5,6 +5,8 @@
 	<groupId>com.sao</groupId>
 	<artifactId>sao-cms</artifactId>
 	<version>0.0.1</version>
+
+	<!-- 开发者简介 -->
 	<developers>
 		<developer>
 			<id>SingleCycle</id>
@@ -16,29 +18,80 @@
 			<organization>骚组织</organization>
 			<email>1019844337@qq.com</email>
 		</developer>
+		<developer>
+			<id>caoting</id>
+			<name>caoting</name>
+			<timezone>${user.timezone}</timezone>
+			<roles>
+				<role>PHP Engineer</role>
+			</roles>
+			<organization>骚组织</organization>
+		</developer>
+		<developer>
+			<id>wangsheng</id>
+			<name>wangsheng</name>
+			<timezone>${user.timezone}</timezone>
+			<roles>
+				<role>Operation Engineer</role>
+			</roles>
+		</developer>
 	</developers>
 
+	<!-- 变量定义 -->
 	<properties>
 		<jdk.version>1.9</jdk.version>
 		<file.encoding>utf-8</file.encoding>
-		<spring-cloud-serial.version></spring-cloud-serial.version>
+		<spring-cloud-serial.version>Finchley.SR1</spring-cloud-serial.version>
+		<lombok.version>1.16.18</lombok.version>
+		<log4j2.version>2.11.1</log4j2.version>
 	</properties>
 
+	<!-- 依赖版本控制 -->
 	<dependencyManagement>
-
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud-serial.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
 	</dependencyManagement>
 
+	<!-- 公共依赖 -->
 	<dependencies>
-
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
+	<!-- 环境配置 -->
 	<profiles>
+		<!-- 开发环境 -->
 		<profile>
 			<id>DevEnd</id>
 		</profile>
+
+		<!-- 测试环境 -->
 		<profile>
 			<id>TestEnv</id>
 		</profile>
+
+		<!-- 生产环境 -->
 		<profile>
 			<id>ProEnv</id>
 		</profile>
